@@ -6,18 +6,13 @@ var motmotus="emmanuel";
 var motmotusarray=motmotus.split('');
 
 var motmotuslu="";
+var motpendu="EMMANUEL";
 var nbcoupMotus=0;
 var ltrouve=new Array();
 
 var motmeles1 = "informa"
 var motmeles2 = "maxime"
 
-// variables poour pendu
-var motpendu="EMMANUEL";
-var trouve=false;
-var found=0;
-var missed=0;
-var end=false;
 
 var lettres = new Array("A","B","C","D","E","F","G","H","I",
 "J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z");
@@ -75,7 +70,6 @@ function login(){
 			players.push(nplayer);
 			console.log(nplayer);
 			localStorage.setItem(nplayer.name, JSON.stringify(nplayer));
-			document.getElementById("btn2").innerHTML = "Log Out";
 		}
 		
 		for(var i=0;i<players.length;i++){
@@ -88,8 +82,7 @@ function login(){
         
 		
 	}else{
-		logout();
-		document.getElementById("btn2").innerHTML = "Log In";
+		alert(currentPlayer.name + " is already playing");
 	}
 }
 
@@ -182,6 +175,8 @@ function down(){
 
 }
 
+
+
 function crc(){
 	var canvas = document.createElement('canvas');
 	canvas.style.border = "1px solid";
@@ -212,6 +207,7 @@ function currentPlayer(){
 	currentPlayer = localStorage.getItem("currentPlayer");
 	console.log("CurrentPlayer = " + currentPlayer);
 }
+
 
 function crGrille(game){
 	var x=0;
@@ -279,7 +275,7 @@ if(game == 's' || game =='sl'){
 	for(i=0;i<x;i++){
 		table += "<tr>";
 		for(j=0;j<y;j++){
-			table += "<td  id='" + ((i+1)*10+j) + "'  style='text-align: center; width:40px;height:40px;border-style:solid;border-width:3px;border-color:#33f; font-size: 13;'>" + /*((i+1)*10+j)  +*/" </td>";
+			table += "<td  id='" + ((i+1)*10+j) + "'  style='text-align: center; width:40px;height:40px;border-style:solid;border-width:3px;border-color:#33f; font-size: 13;'>" + ((i+1)*10+j)  +" </td>";
 		}
 		table += "</tr>";
 	}
@@ -302,6 +298,8 @@ function setGrille(game){
 	document.getElementById("grille").style.top="500px";
 	document.getElementById("grille").style.left="500px";
 }
+
+
 
 function changeColor(cell, color){
 	cell.style.backgroundColor=color;
@@ -399,20 +397,17 @@ function crClavier(){
 }
 
 function setChar(e){
-/*
+
 	var motarray = motpendu.split('');
 	var trouve=false;
 	var found=0;
 	var missed=0;
 	var end=false;
 	var letters=new Array();
-*/	
-	trouve = false;
-	setImg(missed+1);
 	
 	for(var i=0; i< motpendu.length; i++){
 		
-		if(motpendu.charAt(i) == e.innerHTML){
+		if(e.innerHTML == motpendu.charAt(i)){
 			document.getElementById("table").rows[0].cells[i].innerHTML = e.innerHTML;
 			//console.log(letters);
 
@@ -421,20 +416,7 @@ function setChar(e){
 			trouve = true;
 			found++;
 			console.log("found="+found);
-			//console.log("missed"+missed);
-		}/*else{
-			e.style.backgroundColor='red';
-			e.style.border='red';
-		}*/
-	}
-	
-	if(!trouve){
-		missed++;
-		//setImg(missed);
-		console.log("missed="+missed);
-		if(missed == 10){
-			end = true;
-			console.log("you lost");
+			console.log("missed"+missed);
 		}
 	}
 	
@@ -442,27 +424,23 @@ function setChar(e){
 		alert("you won");
 		end=true;
 	}
-	
-	
+
+	if(!trouve){
+		missed++;
+		console.log("missed"+missed);
+
+		if(missed == 5){
+			end = true;
+			alert("you lost");
+		}
+	}
 
 
-}
-
-function setImg(i){
-	var elem = document.createElement("img");
-	var path='p'+ i +'.png' ;
-	elem.setAttribute("src", path);
-	elem.setAttribute("height", "300");
-	elem.setAttribute("width", "300");
-	elem.setAttribute("alt", "Flower");
-	document.getElementById("penduimg").innerHTML=(elem);
-	document.getElementById("penduimg").style.top="400px";
 }
 
 var Pendu = class{
 
 	constructor(){
-		
 		this.player = localStorage.getItem("currentPlayer");
 		this.grille = crGrille('p');
 		this.clavier = crClavier();
@@ -557,8 +535,8 @@ function getText(){
 	
 
 	if(motmotuslu.length == 8){
-		
-		for(var i=0; i<motmotus.length; i++){
+		console.log(motmotusarray);
+		for(var i in motmotusarray){
 			if(motmotus.charAt(i) == motmotuslu.charAt(i)){
 				table.rows[nbcoupMotus-1].cells[i].innerHTML = motmotuslu.charAt(i);
 				table.rows[nbcoupMotus-1].cells[i].style.backgroundColor = "red";
@@ -631,29 +609,8 @@ rl.on('line', function(line) {
 rl.on('close', function() {
   // do something on finish here
   console.log('arr', arr);
-});	
-}
-
-function setButtons(){
-	
-	var player = localStorage.getItem("currentPlayer");
-	
-	document.getElementById("btn1").style.display="inline";
-	document.getElementById("btn3").style.display="inline";
-	
-		document.getElementById("btn2").style.display="inline";
-	
-	
+});
 	
 	
 	
 }
-
-
-
-
-
-
-
-
-

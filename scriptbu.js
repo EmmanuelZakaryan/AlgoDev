@@ -18,7 +18,6 @@ var trouve=false;
 var found=0;
 var missed=0;
 var end=false;
-// variables pour pendu
 
 var lettres = new Array("A","B","C","D","E","F","G","H","I",
 "J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z");
@@ -58,6 +57,8 @@ function chargeArray(){
 	}
 }
 
+
+
 function login(){
 
 	currentPlayer = JSON.parse(localStorage.getItem('currentPlayer'));
@@ -75,8 +76,6 @@ function login(){
 			console.log(nplayer);
 			localStorage.setItem(nplayer.name, JSON.stringify(nplayer));
 			document.getElementById("btn2").innerHTML = "Log Out";
-			document.getElementById("btn4").style.display = "inline";
-			document.getElementById("btn4").innerHTML = nplayer.name;
 		}
 		
 		for(var i=0;i<players.length;i++){
@@ -91,8 +90,6 @@ function login(){
 	}else{
 		logout();
 		document.getElementById("btn2").innerHTML = "Log In";
-		document.getElementById("btn4").style.display = "none";
-		//document.getElementById("btn4").innerHTML = nplayer.name;
 	}
 }
 
@@ -232,7 +229,7 @@ if(game == 's' || game =='sl'){
 	x,y=3;
 	k,m=3;
 
-	table = "<table id='table' style='border-style:solid;border-collapse:collapse;background-color:#36C;font-family:Helvetica,arial;font-size:30px;color:#fff;font-weight:bold;'>";
+	table = "<table id='table'  style='border-style:solid;border-collapse:collapse;background-color:#36C;font-family:Helvetica,arial;font-size:30px;color:#fff;font-weight:bold;'>";
  	nbcases=1;
 	for(i=0; i<3;i++){
 		table += "<tr>";
@@ -246,7 +243,7 @@ if(game == 's' || game =='sl'){
 				table+="<tr>";
 				
 				for(m=0; m<3; m++){
-					table += "<td id='input"+nbcases + "td'  style='text-align: center; width:40px;height:40px;border-style:solid;border-width:3px;border-color:#33f; font-size: 13;'> <input id='input"+nbcases+"'  onblur='onblursud(this)'   style='background-color: #3498db;text-align:center;color:red; font-size: 15px; width: 30px; height: 30px;'  maxlength=1>  </td>";
+					table += "<td id='" + nbcases + "' style='text-align: center; width:40px;height:40px;border-style:solid;border-width:3px;border-color:#33f; font-size: 13;'>" + /*((k+1)*10+m)*/nbcases + " </td>";
 					nbcases++;
 				}
 				table+="</tr>";
@@ -296,50 +293,6 @@ if(game == 's' || game =='sl'){
 	
 	document.getElementById("grille").style.top="500px";
 	document.getElementById("grille").style.left="500px";
-}
-
-function onblursud(e){
-	console.log(e.value);
-	
-	if(!isNaN(e.value)){
-		
-		if(checkl(e.value)){
-			document.getElementById(e.id).value = Number(e.value);
-		}else{
-			alert("already present");
-		}
-		
-		
-		
-	}else{
-		
-		console.log("not integer");
-		e.value = "";
-	}
-	
-	
-	
-}
-
-function checkl(v){
-	
-	var j=0;
-	var larray=new Array();
-	
-	for(i=0+(j*9); i<9+(j*9); i++){
-		if(document.getElementById(i+"input") == v){
-			return false;
-		}
-	}
-	return true;
-}
-
-function checkc(j){
-	
-}
-
-function checkz(){
-	
 }
 
 function setGrille(game){
@@ -536,35 +489,6 @@ function penduf(){
 }
 
 
-var Sudoku = class{
-
-	constructor(){
-		
-		this.player = localStorage.getItem("currentPlayer");
-		this.grille = crGrille('s');
-		
-		
-	}
-	go(){
-		document.getElementById("card").style.display="none";
-		document.getElementById("card1").style.display="none";
-		document.getElementById("card2").style.display="none";
-		document.getElementById("card3").style.display="none";
-		document.getElementById("card4").style.display="none";
-		
-
-	}
-}		
-
-function sudokuf(){
-
-	var sudoku;
-	
-	sudoku = new Sudoku();
-	sudoku.go();
-
-}
-
 var Motus = class{
 	
 	constructor(){
@@ -716,13 +640,9 @@ function setButtons(){
 	
 	document.getElementById("btn1").style.display="inline";
 	document.getElementById("btn3").style.display="inline";
-	document.getElementById("btn2").style.display="inline";
-	//document.getElementById("btn4").style.display="inline";
 	
-	if(player){
-		document.getElementById("btn4").style.display="inline";
-		document.getElementById("btn4").innerHTML = player.name;
-	}
+		document.getElementById("btn2").style.display="inline";
+	
 	
 	
 	

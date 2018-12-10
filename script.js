@@ -3,8 +3,6 @@ var players = new Array();
 var canvas=null;
 var game=false;
 var motmotus="emmanuel";
-var motarray=motmotus.split('');
-
 var motmotuslu="";
 var mot="Emmanuel";
 var nbcoupMotus=0;
@@ -13,6 +11,8 @@ var ltrouve=new Array();
 var motmeles1 = "informa"
 var motmeles2 = "maxime"
 
+var mots = new Array("Informatique", "Dynamique", "Allocation", 
+"Cellule", "Pointeur");
 
 var lettres = new Array("A","B","C","D","E","F","G","H",
 "J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z");
@@ -200,6 +200,10 @@ function loadMe()
 	  
 }
 
+function change(){
+
+	
+}
 
 function crc(){
 	var canvas = document.createElement('canvas');
@@ -451,10 +455,9 @@ function motusf(){
 
 function getText(){
 	var i;
-
 	nbcoupMotus++;
 	console.log("nbcoup="+nbcoupMotus);
-	
+	console.log(currentPlayer);
 
 	x = document.getElementById("input");
 
@@ -472,17 +475,14 @@ function getText(){
 		
 	}
 
-	
-
 	if(motmotuslu.length == 8){
-		
 		for(var i=0; i<8; i++){
 			if(motmotus.charAt(i) == motmotuslu.charAt(i)){
 				table.rows[nbcoupMotus-1].cells[i].innerHTML = motmotuslu.charAt(i);
 				table.rows[nbcoupMotus-1].cells[i].style.backgroundColor = "red";
 				
 				ltrouve.push(table.rows[nbcoupMotus-1].cells[i].innerHTML = motmotuslu.charAt(i));
-				
+				console.log("lettres found - "+ltrouve);
 				
 				//currentPlayer.score+=2;
 				
@@ -501,22 +501,19 @@ function getText(){
 			}
 			
 		}
-		
 	}
 	if(motmotus == motmotuslu){
 		console.log("you won");
 		//up();
 	}
-	console.log("lettres found - "+ltrouve);
-
 	
 }
 
 
 function difarray (array1, array2) {
 	var temp = [];
-	array1 = array1.toString().split(',').map(String);
-	array2 = array2.toString().split(',').map(String);
+	array1 = array1.toString().split(',').map(Number);
+	array2 = array2.toString().split(',').map(Number);
 
 	for (var i in array1) {
 		if(array2.indexOf(array1[i]) === -1) temp.push(array1[i]);

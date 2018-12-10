@@ -9,25 +9,8 @@
 				var tableauMot=new Array();	// Le tableau qui contient les lettres du mot � trouver
 				var mots=new Array();		// Le tableau qui contient tous les mots possibles
 				
-				var tailleMot;				// Le nombre de lettres du mot � trouver
-				var coupsManques=0;			// Le nombre de lettres fausses essay�es
-				var lettresTrouvees=0;		// Le nombre de lettres trouv�es
-				var fini=false;				// true si le jeu est termin�
 				
-				mots[0]="TITANESQUE";
-				mots[1]="ANABELLE";
-				mots[2]="POMPIER";
-				mots[3]="OBELISQUE";
-				mots[4]="PLACARD";
-				mots[5]="RADIATEUR";
-				mots[6]="DEODORANT";
-				mots[7]="CAMION";
-				mots[8]="HORLOGE";
-				mots[9]="MARGUERITE";
-				mots[10]="ELEPHANT";
-				mots[11]="IGLOO";
-				mots[12]="NAVIRE";
-				
+		
 				// On prend un mot au hasard en fonction de la seconde en cours
 				motSecret=mots[now.getSeconds() % mots.length];
 				tailleMot=motSecret.length;

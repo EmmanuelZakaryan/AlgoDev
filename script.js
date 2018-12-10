@@ -2,14 +2,10 @@ var currentPlayer=null;
 var players = new Array();
 var canvas=null;
 var game=false;
-var motmotus="emmanuel";
+var motmotus="Emmanuel";
 var motmotuslu="";
 var mot="Emmanuel";
 var nbcoupMotus=0;
-var ltrouve=new Array();
-
-var motmeles1 = "informa"
-var motmeles2 = "maxime"
 
 var mots = new Array("Informatique", "Dynamique", "Allocation", 
 "Cellule", "Pointeur");
@@ -246,7 +242,7 @@ function crGrille(game){
 	var m;
 	var table=null;
 	var stable=null;
-	var nbcases=0;
+	var nbcases;
 
 if(game == 's' || game =='sl'){
 
@@ -267,7 +263,7 @@ if(game == 's' || game =='sl'){
 				table+="<tr>";
 				
 				for(m=0; m<3; m++){
-					table += "<td id='" + nbcases + "' style='text-align: center; width:40px;height:40px;border-style:solid;border-width:3px;border-color:#33f; font-size: 13;'>" + /*((k+1)*10+m)*/nbcases + " </td>";
+					table += "<td id='" + ((i+1)*10+m) + "' style='text-align: center; width:40px;height:40px;border-style:solid;border-width:3px;border-color:#33f; font-size: 13;'>" + /*((k+1)*10+m)*/nbcases + " </td>";
 					nbcases++;
 				}
 				table+="</tr>";
@@ -293,8 +289,8 @@ if(game == 's' || game =='sl'){
 	}
 	
 	if(game == "mm"){
-		x=12;
-		y=12;
+		x=10;
+		y=10;
 	}
 
 	table = "<table id='table'  style='border-style:solid;border-collapse:collapse;background-color:#36C;font-family:Helvetica,arial;font-size:30px;color:#fff;font-weight:bold;'>";
@@ -302,7 +298,7 @@ if(game == 's' || game =='sl'){
 	for(i=0;i<x;i++){
 		table += "<tr>";
 		for(j=0;j<y;j++){
-			table += "<td  id='" + ((i+1)*10+j) + "'  style='text-align: center; width:40px;height:40px;border-style:solid;border-width:3px;border-color:#33f; font-size: 13;'>" + ((i+1)*10+j)  +" </td>";
+			table += "<td id='" + ((i+1)*10+j) + "' style='text-align: center; width:40px;height:40px;border-style:solid;border-width:3px;border-color:#33f; font-size: 13;'>"/* + ((i+1)*10+j) + */+" </td>";
 		}
 		table += "</tr>";
 	}
@@ -311,8 +307,6 @@ if(game == 's' || game =='sl'){
 }
 	
 	document.getElementById("grille").innerHTML = table;
-	
-	return table;
 	
 	document.getElementById("grille").style.top="500px";
 	document.getElementById("grille").style.left="500px";
@@ -338,98 +332,22 @@ function vendu(){
 
 }
 
-function changeColor(cell, color){
-	cell.style.backgroundColor=color;
-}
+function motus(){
 
-var Motsmeles = class{
+	crGrille('m');
 
-	constructor(){
-		this.grille = crGrille('mm');
-		this.mot1 = motmeles1;
-		this.mot2 = motmeles2;
-		this.player = localStorage.getItem("currentPlayer");
-		//document.getElementById("grille").innerHTML = this.grille;
-		document.getElementById("card").style.display="none";
-		document.getElementById("card1").style.display="none";
-		document.getElementById("card2").style.display="none";
-		document.getElementById("card3").style.display="none";
-		document.getElementById("card4").style.display="none";
-		
-		var randl1 = Math.floor(Math.random() * (11)) + 1;
-		var randl2 = Math.floor(Math.random() * (11)) + 1;
+	currentPlayer = localStorage.getItem("currentPlayer");
 	
-		var rand = ( Math.floor(Math.random() * 10));
-		var rand2 = ( Math.floor(Math.random() * 10));
-		
-		if( rand < (11 - motmeles1.length) && (rand != rand2) &&(randl1 != randl2) && rand2 < (11 - motmeles2.length) ){
-		
-			var indexc1 = rand;
-			var indexc2 = rand2;
-			var indexl1 = randl1;
-			var indexl2 = randl2;
-			var indexarray1 = new Array();
-			var indexarray2 = new Array();
-			
-			for(var i=indexc1,j=0; i< (indexc1+motmeles1.length-1),j< motmeles1.length; i++,j++){
-			
-				table.rows[indexl1].cells[i].innerHTML = motmeles1.charAt(j);
-				
-				document.getElementById(table.rows[indexl1].cells[i].id).onclick = function(){   changeColor(table.rows[indexl1].cells[i],'red');  };
-				
-				//table.rows[indexl1].cells[i].style.backgroundColor="red";
-				
-				//table.rows[indexl1].cells[i].onclick = function(){   changeColor(table.rows[indexl1].cells[i],'red');  };
-				
-			}
-			
-			
-			for(var i=indexc2,j=0; i< (indexc2+motmeles2.length-1),j< motmeles2.length; i++,j++){
-			
-				table.rows[indexl2].cells[i].innerHTML = motmeles2.charAt(j);
-				//table.rows[indexl2].cells[i].style.backgroundColor="red";
-				
-				//table.rows[indexl2].cells[i].onclick = function(){   changeColor(table.rows[indexl2].cells[i],'yellow');  };
-				
-				
-				
-			}
-		
-		}else{
-			new Motsmeles();
-		}
-			
-	}
-}
 
-function motsmelesf(){
-	
-	var motmeles;
-	
-	motsmeles = new Motsmeles();
+	document.getElementById("card").style.display="none";
+	document.getElementById("card1").style.display="none";
+	document.getElementById("card2").style.display="none";
+	document.getElementById("card3").style.display="none";
+	document.getElementById("card4").style.display="none";
 
-}
+	document.getElementById("inputdiv").style.display="inline";
 
-		
-var Motus = class{
-	
-	constructor(){
-		
-		this.player = localStorage.getItem("currentPlayer");
-		this.grille = crGrille('m');
-		
-	}
-			
-	go(){
-		document.getElementById("card").style.display="none";
-		document.getElementById("card1").style.display="none";
-		document.getElementById("card2").style.display="none";
-		document.getElementById("card3").style.display="none";
-		document.getElementById("card4").style.display="none";
-
-		document.getElementById("inputdiv").style.display="inline";
-		
-		for(var i=0; i<8; i++){
+	for(var i=0; i<8; i++){
 
 		if(i == 3 || i == 1){
 
@@ -440,16 +358,20 @@ var Motus = class{
 			table.rows[0].cells[i].innerHTML = "";
 
 		}
+
 	}
-}		
-}	
-
-function motusf(){
+/*
+	if(motmotuslu.length == 8){
+		for(var i=0; i<7; i++){
+			if(motmotus.charAt(i) == motmotuslu.charAt(i)){
+				table.rows[1].cells[i].innerHTML = motmotuslu.charAt(i);
+				table.rows[1].cells[i].style.backgroundColor = "red";
+			}
+		}
+	}
+*/
 	
-	var motus;
-	motus = new Motus();
-	motus.go();
-
+	
 }
 
 
@@ -476,78 +398,42 @@ function getText(){
 	}
 
 	if(motmotuslu.length == 8){
-		for(var i=0; i<8; i++){
+		for(var i=0; i<7; i++){
 			if(motmotus.charAt(i) == motmotuslu.charAt(i)){
-				table.rows[nbcoupMotus-1].cells[i].innerHTML = motmotuslu.charAt(i);
-				table.rows[nbcoupMotus-1].cells[i].style.backgroundColor = "red";
-				
-				ltrouve.push(table.rows[nbcoupMotus-1].cells[i].innerHTML = motmotuslu.charAt(i));
-				console.log("lettres found - "+ltrouve);
-				
-				//currentPlayer.score+=2;
+				table.rows[nbcoupMotus].cells[i].innerHTML = motmotuslu.charAt(i);
+				table.rows[nbcoupMotus].cells[i].style.backgroundColor = "red";
+				currentPlayer.score+=2;
 				
 			}else{
 				if(motmotus.includes(motmotuslu.charAt(i))){
-					table.rows[nbcoupMotus-1].cells[i].innerHTML = motmotuslu.charAt(i);
-					table.rows[nbcoupMotus-1].cells[i].style.backgroundColor = "yellow";
-					//currentPlayer.score+=1;
+					table.rows[nbcoupMotus].cells[i].innerHTML = motmotuslu.charAt(i);
+					table.rows[nbcoupMotus].cells[i].style.backgroundColor = "yellow";
+					currentPlayer.score+=1;
 					
 				}else{
-					table.rows[nbcoupMotus-1].cells[i].innerHTML = table.rows[nbcoupMotus-1].cells[i].innerHTML;
+					table.rows[nbcoupMotus].cells[i].innerHTML = table.rows[nbcoupMotus-1].cells[i].innerHTML;
 
 					
 					
 				}
 			}
 			
+			
 		}
 	}
 	if(motmotus == motmotuslu){
 		console.log("you won");
-		//up();
+		up();
 	}
 	
 }
 
+function wordcontlet(word,l){
+	if("word".includes("l")){
 
-function difarray (array1, array2) {
-	var temp = [];
-	array1 = array1.toString().split(',').map(Number);
-	array2 = array2.toString().split(',').map(Number);
+		for(i=0; i<word.length; i++){
+			
+		}
 
-	for (var i in array1) {
-		if(array2.indexOf(array1[i]) === -1) temp.push(array1[i]);
 	}
-	for(i in array2) {
-		if(array1.indexOf(array2[i]) === -1) temp.push(array2[i]);
-	}
-	return temp.sort((a,b) => a-b);
-}
-
-
-
-function getWord(){
-	
-	var fs = require('fs');
-	var readline = require('readline');
-	var stream = require('stream');
-
-	var instream = fs.createReadStream('mots.txt');
-	var outstream = new stream;
-	var rl = readline.createInterface(instream, outstream);
-
-	var arr = [];
-
-rl.on('line', function(line) {
-  // process line here
-  arr.push(line);
-});
-
-rl.on('close', function() {
-  // do something on finish here
-  console.log('arr', arr);
-});
-	
-	
-	
 }

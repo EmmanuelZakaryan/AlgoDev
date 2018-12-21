@@ -1,0 +1,92 @@
+.tableauInterieur{
+	width:40px;
+	height:40px;
+	font-family:Arial, sans serif;
+	font-size:20px;
+	color:red;
+	text-align:center;
+	border:1px black solid;
+	cursor:pointer;
+	}
+
+.tableauInterieur b{
+	color:grey;
+	cursor:pointer;
+}
+
+.tableauExterieur{
+	border:2px black solid;
+	text-align:center;
+	}
+
+td{
+	font-family:Arial, sans serif;
+	font-size:20px;
+	}
+
+a{
+	font-family:Arial, sans serif;
+	font-size:20px;
+	text-decoration:none;
+	}
+	
+b{
+	font-family:Arial, sans serif;
+	font-size:20px;
+	
+	}
+	
+#page {
+    background-color:#FFFFFF;
+    text-align:left;
+    width:60%;
+    height:100px;
+}
+
+
+
+img.pendu {
+	height:400px;
+	width:400px;
+}
+
+
+
+#mot {
+    margin:20px 0 0 0;
+    clear:both;
+    top:100px;
+}
+
+#mot td {
+    padding:10px;
+    background-color:white;
+    border:2px inset black;
+    width:30px;
+    height:30px;
+    font-weight:bold;
+    font-size:1.5em;
+    text-align:center;
+}
+
+ #mot p{
+    visibility:hidden;
+}
+
+#clavier{
+    border:4px outset black;
+    padding:10px;
+    background-color:black;
+}
+
+#clavier td {
+    background-color:white;
+    width:25px;
+    height:25px;
+    text-align:center;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+
+	}

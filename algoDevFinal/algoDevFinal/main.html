@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html>
+<head>
+        <script language="JavaScript">
+			
+				var motSecret;
+				
+				var now=new Date();			// Date d'aujourd'hui
+				var tableauMot=new Array();	// Le tableau qui contient les lettres du mot � trouver
+				var mots=new Array();		// Le tableau qui contient tous les mots possibles
+				
+				var tailleMot;				// Le nombre de lettres du mot � trouver
+				var coupsManques=0;			// Le nombre de lettres fausses essay�es
+				var lettresTrouvees=0;		// Le nombre de lettres trouv�es
+				var fini=false;				// true si le jeu est termin�
+				
+				mots[0]="TITANESQUE";
+				mots[1]="ANABELLE";
+				mots[2]="POMPIER";
+				mots[3]="OBELISQUE";
+				mots[4]="PLACARD";
+				mots[5]="RADIATEUR";
+				mots[6]="DEODORANT";
+				mots[7]="CAMION";
+				mots[8]="HORLOGE";
+				mots[9]="MARGUERITE";
+				mots[10]="ELEPHANT";
+				mots[11]="IGLOO";
+				mots[12]="NAVIRE";
+				
+				// On prend un mot au hasard en fonction de la seconde en cours
+				motSecret=mots[now.getSeconds() % mots.length];
+				tailleMot=motSecret.length;
+				
+				// Permet de changer la couleur des touches du clavier
+				function changeCouleur(element,couleur){
+					element.style.backgroundColor=couleur;
+				}
+				
+				// G�re tous les traitements � faire lorsqu'on appuie sur une touche
+				function proposer(element){
+					
+					// Si la couleur de fond est lightgreen, c'est qu'on a d�j� essay� - on quitte la fonction
+					if(element.style.backgroundColor=="lightGreen" ||fini) return;
+					
+					// On r�cup�re la lettre du clavier et on met la touche en lightgreen (pour signaler qu'elle est cliqu�e)
+					var lettre=element.innerHTML;
+					changeCouleur(element,"lightGreen");
+					
+					// On met la variable trouve � false;
+					var trouve=false;
+					
+					// On parcours chaque lettre du mot, on cherche si on trouve la lettre s�l�ectionn�e au clavier
+					for(var i=0; i<tailleMot; i++) {
+						
+						// Si c'est le cas :
+						if(tableauMot[i].innerHTML==lettre) {
+							tableauMot[i].style.visibility='visible';	// On affiche la lettre
+							trouve=true;
+							lettresTrouvees++;
+							up();
+						}
+						
+					}
+					// Si la lettre n'est pas pr�sente, trouv� vaut toujours false :
+					if(!trouve){
+						coupsManques++;
+						down();
+						document.images['pendu'].src="images/pendu_"+coupsManques+".jpg"; // On change l'image du pendu
+						
+						// Si on a rat� 9 fois :
+						if(coupsManques==9){
+							alert("Vous avez perdu !");
+							for(var i=0; i<tailleMot; i++) tableauMot[i].style.visibility='visible';
+							fini=true;
+							// on affiche le mot, on fini le jeu
+						}
+					}
+					if(lettresTrouvees==tailleMot){
+						alert("Bravo ! Vous avez d�couvert le mot secret !");
+						fini=true;
+					}
+				}
+			
+        </script>
+        
+
+           
+<div id="divmotus"  style="height: 400px; width: 1038px; display: none; position:absolute; border: 1px solid; top:180px; left:260px;   z-index:0">  
+    
+	
+</div>
+<div id="inputmotus"  style="height: 400px; width: 1038px; display: none; position:absolute; border: 1px solid; top:180px; left:260px;   z-index:0">  
+    
+</div>
+
+
+    <div id="divpendu"  style="height: 400px; width: 1038px; display: none; position:absolute; border: 1px solid; top:180px; left:260px;   z-index:0">
+	
+        <img name="pendu" class="pendu" src="pendu.png">
+        
+        <h1>Pendu</h1>
+    
+        <table id="clavier">
+         <tr>
+          <td onclick="proposer(this);" >A</td>
+          <td onclick="proposer(this);" >B</td>
+          <td onclick="proposer(this);" >C</td>
+          <td onclick="proposer(this);" >D</td>
+          <td onclick="proposer(this);" >E</td>
+          <td onclick="proposer(this);" >F</td>
+          <td onclick="proposer(this);" >G</td>
+          <td onclick="proposer(this);" >H</td>
+          <td onclick="proposer(this);" >I</td>
+          <td onclick="proposer(this);" >J</td>
+         </tr>
+         <tr>
+          <td onclick="proposer(this);" >K</td>
+          <td onclick="proposer(this);" >L</td>
+          <td onclick="proposer(this);" >M</td>
+          <td onclick="proposer(this);" >N</td>
+          <td onclick="proposer(this);" >O</td>
+          <td onclick="proposer(this);" >P</td>
+          <td onclick="proposer(this);" >Q</td>
+          <td onclick="proposer(this);" >R</td>
+          <td onclick="proposer(this);" >S</td>
+          <td onclick="proposer(this);" >T</td>
+         </tr>
+         <tr>
+          <td onclick="proposer(this);" >U</td>
+          <td onclick="proposer(this);" >V</td>
+          <td onclick="proposer(this);" >W</td>
+          <td onclick="proposer(this);" >X</td>
+          <td onclick="proposer(this);" >Y</td>
+          <td onclick="proposer(this);" >Z</td>
+         </tr>
+        </table>
+        <br>
+        <a class="lien" href="javascript:location.reload();"></a>
+            
+        <table id="mot">
+            <tr>
+                <script language="javascript">
+                    for(var i=0; i<tailleMot; i++) document.write("<td> <p id=\""+i+"\">"+motSecret.charAt(i)+"</p></td>");
+                </script>
+            </tr>
+        </table>
+        
+        
+        <script language="javascript">
+            for(var i=0; i<tailleMot; i++) tableauMot[i]=document.getElementById(i);
+        </script>
+    
+</div>
+    </div>
+
+
+<meta chaset="UTF-8">
+<meta name="viewport" content="width=device width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link rel="stylesheet" href="css.css">
+<link rel=Stylesheet type="text/css" href=stylePendu.css>
+
+<script src="scriptbu.js">
+</script>
+</head>
+<body onload="">
+
+
+
+<div class="container">
+        <button onclick="main()" class="btn btn1">Play</button>
+        <button onclick="login()" class="btn btn2">Log In</button>
+        <button onclick="logout()" class="btn btn3">Log Out</button>
+        <button onclick="showCurrent()" class="btn btn4">Show Player</button>
+</div>
+
+<div id="card" class="card">
+
+    <div class="front"><img src="pendu1.jpg"></div>
+    <div class="back" onclick='vendu()' >
+        <div class="details">
+            <h2> Pendu <br><span>Play</span> </h2>
+        </div>
+     </div>  
+</div>
+
+<div id="card1" class="card1">
+
+        <div class="front1"><img src="pendu1.jpg"></div>
+        <div class="back1" onclick="motsmelesf()" >
+            <div class="details">
+                <h2> Melés <br><span>Play</span> </h2>
+            </div>
+         </div>  
+    </div>
+
+<div id="card2" class="card2">
+
+        <div class="front2"><img width="190" height="240" src="motus.png"></div>
+        <div class="back2" onclick="motusf()" >
+            <div class="details">
+                <h2> Motus <br><span>Play</span> </h2>
+            </div>
+         </div>  
+    </div>
+
+<div id="card3" class="card3">
+
+        <div class="front3"><img src="sudoku.jpg"></div>
+        <div class="back3" onclick="crGrille('s')" >
+            <div class="details">
+                <h2> Sudoku <br><span>Play</span> </h2>
+            </div>
+         </div>  
+    </div>
+<div id="card4" class="card4">
+
+        <div class="front4" ><img src="sudokul.jpg"></div>
+        <div class="back4" onclick="crGrille('sl')" >
+            <div class="details">
+                <h2> SudokuL <br><span>Play</span> </h2>
+            </div>
+         </div>  
+    </div>
+
+
+<div align="center"  id="grille" haight="200px" width="200px" style="align: center; top: 500px; left: 500px; ">
+    
+</div>
+
+<div  id="inputdiv" style='display: none; left: 50%; top: 50%;'>
+
+    <input id='input' style=' left: 400px; top: 400px;'  value='' type='text' maxlenght='8' autofocus=''>
+	<input id='checkbtn' style=' left: 400px; top: 400px;' type='button' name='' value='Check'  onclick='getText()'>
+
+</div>
+
+
+
+
+
+
+
+    
+
+
+<!--
+<center>
+ <div id="page">
+	
+        <img name="pendu" class="pendu" src="images/pendu_0.jpg">
+            
+            <h1>Jeu de pendu</h1>
+        
+            <h2>Entrez une lettre gr�ce au clavier ci-dessous ; si elle est dans le mot secret, elle sera affich�e mais sinon... la sentence se rapprochera !</h2>
+            
+            <table id="clavier">
+             <tr>
+              <td onclick="proposer(this);" >A</td>
+              <td onclick="proposer(this);" >B</td>
+              <td onclick="proposer(this);" >C</td>
+              <td onclick="proposer(this);" >D</td>
+              <td onclick="proposer(this);" >E</td>
+              <td onclick="proposer(this);" >F</td>
+              <td onclick="proposer(this);" >G</td>
+              <td onclick="proposer(this);" >H</td>
+              <td onclick="proposer(this);" >I</td>
+              <td onclick="proposer(this);" >J</td>
+             </tr>
+             <tr>
+              <td onclick="proposer(this);" >K</td>
+              <td onclick="proposer(this);" >L</td>
+              <td onclick="proposer(this);" >M</td>
+              <td onclick="proposer(this);" >N</td>
+              <td onclick="proposer(this);" >O</td>
+              <td onclick="proposer(this);" >P</td>
+              <td onclick="proposer(this);" >Q</td>
+              <td onclick="proposer(this);" >R</td>
+              <td onclick="proposer(this);" >S</td>
+              <td onclick="proposer(this);" >T</td>
+             </tr>
+             <tr>
+              <td onclick="proposer(this);" >U</td>
+              <td onclick="proposer(this);" >V</td>
+              <td onclick="proposer(this);" >W</td>
+              <td onclick="proposer(this);" >X</td>
+              <td onclick="proposer(this);" >Y</td>
+              <td onclick="proposer(this);" >Z</td>
+             </tr>
+            </table>
+            <br>
+            <a class="lien" href="javascript:location.reload();">Nouvelle partie</a>
+                
+            <table id="mot">
+                <tr>
+                    <script language="javascript">
+                        for(var i=0; i<tailleMot; i++) document.write("<td> <p id=\""+i+"\">"+motSecret.charAt(i)+"</p></td>");
+                    </script>
+                </tr>
+            </table>
+            
+            
+            <script language="javascript">
+                for(var i=0; i<tailleMot; i++) tableauMot[i]=document.getElementById(i);
+            </script>
+        
+        </div>
+    </div>
+</center>
+
+-->
+
+</body>
+</html>
+
